@@ -1,0 +1,56 @@
+[project]
+name = "langchain-db-agent"
+version = "0.1.0"
+description = "Agent that makes queries to the database based on the user input."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.17.1",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.121.1",
+    "langchain>=1.0.5",
+    "langchain-ollama>=1.0.0",
+    "langchain-openai>=1.0.2",
+    "langchain-tavily>=0.2.13",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.1",
+    "python-multipart>=0.0.20",
+    "ruff>=0.14.4",
+    "sqlalchemy[asyncio]>=2.0.44",
+    "supabase>=2.24.0",
+    "tavily-python>=0.7.12",
+    "uvicorn>=0.38.0",
+]
+
+[tool.uv]
+package = true
+
+# Ruff Configuration
+# - Black  => tool.ruff.format
+# - Flake8 => tool.ruff.lint
+# - iSort  => tool.ruff.lint.isort
+# More details on: https://docs.astral.sh/ruff/settings/
+[tool.ruff]
+line-length = 120
+fix = true
+indent-width = 2
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+extend-select = [
+    # Lint Rules
+    # More details on: https://docs.astral.sh/ruff/rules/
+    "E501", # line-too-long
+    "I001", # unsorted-imports
+]
+isort.split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore line-too-long error for tests!
+"tests/**.py" = ["E501"]
+# Ignore un-used import error for alembic.
+"migrations/**.py" = ["F401"]
