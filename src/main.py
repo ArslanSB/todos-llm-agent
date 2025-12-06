@@ -130,9 +130,9 @@ async def chat_endpoint(
   agent = create_agent(
     model=model,
     tools=[TodoSubAgentTool(agent=todo_agent), UserSubAgentTool(agent=user_agent)],
-    middleware=[context_aware_prompt],
     context_schema=AgentContext,
     checkpointer=checkpoint_saver,
+    middleware=[context_aware_prompt],
     system_prompt="""
       You are a coordinator assistant that manages two specialized sub-agents:
       
