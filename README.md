@@ -1,6 +1,6 @@
 # 🤖 ToDo's LLM Agent
 
-A learning project demonstrating a **multi-agent AI architecture** built with [LangChain](https://www.langchain.com/) and [LangGraph](https://langchain-ai.github.io/langgraph/). This application combines a traditional REST API for ToDo management with an intelligent conversational interface that allows querying the application in natural language.
+A learning project demonstrating a **multi-agent AI architecture** built with [LangChain](https://www.langchain.com/). This application combines a traditional REST API for ToDo management with an intelligent conversational interface that allows querying the application in natural language.
 
 ## 📋 Table of Contents
 
@@ -53,7 +53,7 @@ This project showcases a ToDo application with a unique twist: it features an AI
 
 ## 🏗️ Architecture
 
-The application uses a **multi-agent architecture** with LangChain and LangGraph:
+The application uses a **multi-agent architecture** with LangChain:
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -61,8 +61,8 @@ The application uses a **multi-agent architecture** with LangChain and LangGraph
 │  (Orchestrates, formats, handles permissions)   │
 └──────────────┬──────────────────────────────────┘
                │
-       ┌───────┴────────┐
-       │                │
+       ┌───────┴───────┐
+       │               │
 ┌──────▼──────┐  ┌─────▼──────┐
 │  Todo Agent │  │ User Agent │
 │  (SQL DB)   │  │ (Supabase) │
@@ -85,8 +85,8 @@ The application uses a **multi-agent architecture** with LangChain and LangGraph
 - **Framework**: [FastAPI](https://fastapi.tiangolo.com/) - High-performance async web framework
 - **AI/LLM**: 
   - [LangChain](https://www.langchain.com/) - LLM application framework
-  - [LangGraph](https://langchain-ai.github.io/langgraph/) - Agent orchestration
   - [OpenAI GPT-4](https://openai.com/) - Language models
+  - [LangSmith](https://www.langchain.com/langsmith) - Debugging and tracing (optional)
 - **Database**: 
   - [PostgreSQL](https://www.postgresql.org/) - Primary database
   - [SQLAlchemy](https://www.sqlalchemy.org/) - Async ORM
@@ -120,8 +120,8 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/ArslanSB/ToDo-s-LLM-Agent.git
-cd todo-s-llm-agent
+git clone https://github.com/ArslanSB/todos-llm-agent.git
+cd todos-llm-agent
 ```
 
 ### 2. Set Up Python Environment
@@ -176,6 +176,13 @@ SUPABASE_API_KEY=your-supabase-anon-key
 
 # OpenAI Configuration
 OPENAI_API_KEY=sk-your-openai-api-key
+
+# LangSmith Configuration (Optional - for debugging and tracing)
+# Sign up at https://smith.langchain.com/
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT=https://<region>.api.smith.langchain.com
+LANGSMITH_API_KEY=your-langsmith-api-key
+LANGSMITH_PROJECT=langchain-db-agent
 ```
 
 ### 5. Set Up PostgreSQL Database
