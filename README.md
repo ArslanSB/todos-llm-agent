@@ -23,7 +23,7 @@ This project showcases a ToDo application with a unique twist: it features an AI
 
 - **Clean Architecture** principles with domain-driven design
 - **Multi-Agent System** with specialized sub-agents for different data sources
-- **Role-Based Access Control** with admin and regular user permissions
+- **Role-Based Access Control** with admin and regular user permissions (partially!)
 - **Supabase Authentication** for secure user management
 - **PostgreSQL** for data persistence with async SQLAlchemy
 
@@ -103,7 +103,7 @@ Before you begin, ensure you have the following installed:
 - **PostgreSQL** (local installation or Docker)
 - **uv** package manager (recommended) or pip
 - **Supabase Account** (free tier works)
-- **OpenAI API Key** with access to GPT-4 (can also be used with Ollama)
+- **OpenAI API Key** with access to GPT-4 (not required if running locally using Ollama)
 
 ### Installing uv (Recommended)
 
