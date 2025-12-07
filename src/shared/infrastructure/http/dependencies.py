@@ -5,8 +5,11 @@ from uuid import UUID
 
 from fastapi import Depends, Request
 from langchain_core.language_models import BaseChatModel
+from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 from supabase import Client, create_client
+
+from config import get_settings
 
 
 def get_current_user_id(request: Request) -> UUID:
@@ -33,13 +36,21 @@ def get_supabase_client() -> Client:
 
 def get_ai_model() -> BaseChatModel:
   # Main agent model - uses more capable model for coordination and formatting
-  model = ChatOpenAI(model="gpt-4o", temperature=0)
+  if get_settings().use_ollama:
+    model = ChatOllama(model="gpt-oss:20b", temperature=0)
+  else:
+    model = ChatOpenAI(model="gpt-4o", temperature=0)
+
   return model
 
 
 def get_fast_ai_model() -> BaseChatModel:
   # Sub-agent model - uses a faster, cheaper model for data retrieval tasks
-  model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+  if get_settings().use_ollama:
+    model = ChatOllama(model="gpt-oss:20b", temperature=0)
+  else:
+    model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
   return model
 
 

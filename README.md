@@ -103,7 +103,9 @@ Before you begin, ensure you have the following installed:
 - **PostgreSQL** (local installation or Docker)
 - **uv** package manager (recommended) or pip
 - **Supabase Account** (free tier works)
-- **OpenAI API Key** with access to GPT-4 (not required if running locally using Ollama)
+- **LLM Provider** (choose one):
+  - **OpenAI API Key** with access to GPT-4, OR
+  - **Ollama** installed locally for running open-source models
 
 ### Installing uv (Recommended)
 
@@ -144,7 +146,34 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -e .
 ```
 
-### 3. Set Up Supabase
+### 3. Set Up LLM Provider
+
+Choose one of the following options:
+
+#### Option A: OpenAI (Recommended for best performance)
+
+1. Sign up at [platform.openai.com](https://platform.openai.com/)
+2. Create an API key
+3. Set `USE_OLLAMA=false` in your `.env` file
+4. Add your `OPENAI_API_KEY` to `.env`
+
+**Models used:**
+- Main Coordinator Agent: `gpt-4o`
+- Sub-Agents: `gpt-4o-mini`
+
+#### Option B: Ollama (Free, runs locally)
+
+1. Install Ollama from [ollama.ai](https://ollama.ai/)
+2. Pull the required model:
+   ```bash
+   ollama pull gpt-oss:20b
+   ```
+3. Set `USE_OLLAMA=true` in your `.env` file
+4. No API key needed!
+
+**Note:** Ollama runs models locally, so performance depends on your hardware. It's free but may be slower than OpenAI's API.
+
+### 4. Set Up Supabase
 
 1. Create a free account at [supabase.com](https://supabase.com)
 2. Create a new project
@@ -152,7 +181,7 @@ pip install -e .
 4. Copy your **Project URL** and **anon/public API key**
 5. Create test users in **Authentication** → **Users**
 
-### 4. Configure Environment Variables
+### 5. Configure Environment Variables
 
 Create a `.env` file in the root directory:
 
@@ -174,8 +203,12 @@ DB_NAME=langchain_db_agent
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_API_KEY=your-supabase-anon-key
 
-# OpenAI Configuration
+# LLM Configuration
+# Option 1: OpenAI (default)
 OPENAI_API_KEY=sk-your-openai-api-key
+
+# Option 2: Ollama (set to true to use local Ollama models)
+USE_OLLAMA=false
 
 # LangSmith Configuration (Optional - for debugging and tracing)
 # Sign up at https://smith.langchain.com/
@@ -185,7 +218,7 @@ LANGSMITH_API_KEY=your-langsmith-api-key
 LANGSMITH_PROJECT=langchain-db-agent
 ```
 
-### 5. Set Up PostgreSQL Database
+### 6. Set Up PostgreSQL Database
 
 #### Option A: Local PostgreSQL
 
@@ -390,7 +423,9 @@ This is a learning project, but contributions are welcome! Feel free to:
 
 ## 📝 License
 
-This project is for educational purposes. Feel free to use it as a learning resource or starting point for your own projects.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+This is an educational project - feel free to use it as a learning resource or starting point for your own projects.
 
 ## 🙏 Acknowledgments
 
