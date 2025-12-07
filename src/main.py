@@ -30,6 +30,8 @@ fast_api = FastAPI(
   description="An API made for testing purposes building LangChain DB Agent",
   version="0.0.1",
   dependencies=[Depends(supabase_scheme)],
+  contact={"name": "Arslan Sohail Bano", "url": "https://github.com/ArslanSB", "email": "me@arslansb.com"},
+  license_info={"name": "MIT License", "url": "https://github.com/ArslanSB/todos-llm-agent/blob/main/LICENSE"},
 )
 
 fast_api.add_middleware(
@@ -122,7 +124,11 @@ async def chat_endpoint(
   user_agent: CompiledStateGraph = Depends(get_user_agent),
 ):
   """
-  An example chat endpoint that uses the GPT chatbot to respond to user messages.
+  Chat endpoint that coordinates between todo and user sub-agents to answer user queries.
+
+  Arguments:
+  - message: The user's natural language query.
+  - thread_id: Unique identifier for the conversation thread, used for context tracking.
   """
   context = AgentContext(user_id=str(user_id))
 
